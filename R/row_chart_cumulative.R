@@ -118,6 +118,7 @@ row_chart_cum_Server <- function(id, tbl_cum) {
       
       output$ns_plot <-
         shiny::renderPlot(
+          res = ggplot_res,
           {
             shiny::req(
               input$year_slider,

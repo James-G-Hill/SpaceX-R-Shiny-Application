@@ -15,3 +15,5 @@ column_width <- 12
 ms_per_s <- 1000
 s_per_m <- 60
 m_per_h <- 60
+
+ggplot_res <- 96

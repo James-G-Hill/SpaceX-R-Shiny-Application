@@ -66,6 +66,7 @@ row_chart_raw_Server <- function(id, tbl_raw) {
       
       output$ns_plot <-
         shiny::renderPlot(
+          res = ggplot_res,
           {
             shiny::req(
               input$ns_upcoming,
