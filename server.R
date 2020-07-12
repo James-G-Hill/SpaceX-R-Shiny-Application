@@ -6,20 +6,50 @@ source(file = file.path("R", "utils_get_data.R"), local = TRUE)
 
 server <- function(input, output) {
   
-  # Tables
-  tbl_launches <- shiny::reactive({ get_api_launches() })
-  tbl_launchpads <- shiny::reactive({ get_api_launchpads() })
-  tbl_rockets <- shiny::reactive({ get_api_rockets() })
+  timer <- shiny::reactiveTimer(m_per_h * s_per_m * ms_per_s)
   
-  # Data Tab
+  # Tables
+  
+  lst_company <-
+    shiny::reactive(
+      {
+        timer()
+        get_api_company()
+      }
+    )
+  
+  tbl_launches <-
+    shiny::reactive(
+      {
+        timer()
+        get_api_launches()
+      }
+    )
+  
+  tbl_launchpads <-
+    shiny::reactive(
+      {
+        timer()
+        get_api_launchpads()
+      }
+    )
+  
+  tbl_rockets <-
+    shiny::reactive(
+      {
+        timer()
+        get_api_rockets()
+      }
+    )
+  
   lst_tbls <- reactiveValues()
+  
   lst_tbls$launches <- tbl_launches
   lst_tbls$launchpads <- tbl_launchpads
   lst_tbls$rockets <- tbl_rockets
-  data_Server(ns_data, lst_tbls)
   
-  # About Tab
-  lst_company <- shiny::reactive({ get_api_company() })
+  # Servers
+  data_Server(ns_data, lst_tbls)
   about_Server(ns_about, lst_company)
   
 }
