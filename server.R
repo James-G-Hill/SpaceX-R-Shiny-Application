@@ -8,6 +8,6 @@ server <- function(input, output) {
   
   lst_company <- shiny::reactive({ get_api_company() })
   
-  about_Server(ns_about)
+  about_Server(ns_about, lst_company)
   
 }
