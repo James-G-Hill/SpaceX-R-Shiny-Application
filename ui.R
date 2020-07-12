@@ -1,4 +1,5 @@
 ui <-
   shiny::navbarPage(
-    title = "Aerospace - SpaceX Launches"
+    title = "Aerospace - SpaceX",
+    about_UI(ns_about)
   )
