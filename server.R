@@ -49,6 +49,7 @@ server <- function(input, output) {
   lst_tbls$rockets <- tbl_rockets
   
   # Servers
+  charts_Server(ns_chart)
   data_Server(ns_data, lst_tbls)
   about_Server(ns_about, lst_company)
   
