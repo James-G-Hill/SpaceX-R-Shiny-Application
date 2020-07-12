@@ -18,7 +18,6 @@ row_chart_cum_UI <- function(id) {
       left_col_width,
       shiny::wellPanel(
         shiny::h4("Filter Flights"),
-        # shiny::hr(),
         shiny::uiOutput(ns(ns_years)),
         shiny::uiOutput(ns(ns_rocket)),
         shiny::uiOutput(ns(ns_launchpad))
@@ -73,7 +72,7 @@ row_chart_cum_Server <- function(id, tbl_cum) {
           {
             shiny::selectInput(
               ns("rocket_select"),
-              label = "Rocket Type",
+              label = "Rocket Name",
               choices = c("All", unique_rockets())
             )
           }
@@ -100,7 +99,11 @@ row_chart_cum_Server <- function(id, tbl_cum) {
       output$ns_plot <-
         shiny::renderPlot(
           {
-            shiny::req(input$year_slider, input$rocket_select)
+            shiny::req(
+              input$year_slider,
+              input$rocket_select,
+              input$launchpad_select
+            )
             tbl_cum() %>%
               dplyr::filter(
                 !upcoming,

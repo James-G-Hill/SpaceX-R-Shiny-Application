@@ -1,7 +1,7 @@
 # Variables --------------------------------------------------------------------
 
 ns_chart_cum <- "ns_chart_cum"
-# ns_chart_raw <- "ns_chart_raw"
+ns_chart_raw <- "ns_chart_raw"
 
 # Functions --------------------------------------------------------------------
 
@@ -12,7 +12,8 @@ charts_UI <- function(id) {
   shiny::tabPanel(
     title = "Charts",
     row_chart_cum_UI(ns(ns_chart_cum)),
-    shiny::hr()
+    shiny::hr(),
+    row_chart_raw_UI(ns(ns_chart_raw))
   )
   
 }
@@ -45,13 +46,16 @@ charts_Server <- function(id, tbl_combined) {
         shiny::reactive(
           {
             tbl_combined() %>%
+              dplyr::mutate(
+                engine_number = as.character(engine_number),
+                flight_year = as.character(flight_year)
+              ) %>%
               dplyr::select(
                 success,
                 upcoming,
                 crewed,
                 engine_layout,
                 engine_number,
-                engine_type,
                 flight_year,
                 launchpad_name,
                 locality,
@@ -60,6 +64,9 @@ charts_Server <- function(id, tbl_combined) {
               )
           }
         )
+      
+      output$ns_chart_raw <-
+        row_chart_raw_Server(ns_chart_raw, tbl_raw)
       
     }
   )
