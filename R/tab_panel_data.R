@@ -1,7 +1,10 @@
 # Variables --------------------------------------------------------------------
 
 ns_button <- "ns_button"
+ns_datatable <- "ns_datatable"
 ns_radio <- "ns_radio"
+
+rows_per_page <- 5
 
 # Functions --------------------------------------------------------------------
 
@@ -33,7 +36,12 @@ data_UI <- function(id) {
       )
     ),
     shiny::hr(),
-    shiny::fluidRow()
+    shiny::fluidRow(
+      shiny::column(
+        column_width,
+        shiny::dataTableOutput(ns(ns_datatable))
+      )
+    )
   )
   
 }
@@ -43,6 +51,40 @@ data_Server <- function(id, lst_tbls) {
   shiny::moduleServer(
     id,
     function(input, output, server) {
+      
+      tbl <-
+        shiny::reactive(
+          {
+            switch(
+              input$ns_radio,
+              "Launches" = lst_tbls$launches(),
+              "Launchpads" = lst_tbls$launchpads(),
+              "Rockets" = lst_tbls$rockets()
+            )
+          }
+        )
+      
+      output$ns_datatable <-
+        shiny::renderDataTable(
+          tbl(),
+          options = list(
+            pageLength = rows_per_page
+          )
+        )
+      
+      output$ns_button <-
+        shiny::downloadHandler(
+          filename = function(file) {
+            stringr::str_c(
+              "spacex",
+              stringr::str_to_lower(input$ns_radio),
+              Sys.Date(),
+              ".xlsx",
+              sep = "_"
+            )
+          },
+          content = function(con) { writexl::write_xlsx(tbl(), con) }
+        )
       
     }
   )
