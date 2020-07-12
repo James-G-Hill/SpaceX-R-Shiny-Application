@@ -5,6 +5,7 @@ library(magrittr)
 # Namespaces -------------------------------------------------------------------
 
 ns_about <- "about"
+ns_chart <- "chart"
 ns_data <- "data"
 
 # Magic Numbers ----------------------------------------------------------------
