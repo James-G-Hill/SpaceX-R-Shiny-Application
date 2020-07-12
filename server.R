@@ -42,6 +42,21 @@ server <- function(input, output) {
       }
     )
   
+  tbl_combined <-
+    shiny::reactive(
+      {
+        tbl_launches() %>%
+          dplyr::left_join(
+            tbl_launchpads(),
+            by = c("id_launchpad" = "id_launchpad")
+          ) %>%
+          dplyr::left_join(
+            tbl_rockets(),
+            by = c("id_rocket" = "id_rocket")
+          )
+      }
+    )
+  
   lst_tbls <- reactiveValues()
   
   lst_tbls$launches <- tbl_launches
@@ -49,7 +64,7 @@ server <- function(input, output) {
   lst_tbls$rockets <- tbl_rockets
   
   # Servers
-  charts_Server(ns_chart)
+  charts_Server(ns_chart, tbl_combined)
   data_Server(ns_data, lst_tbls)
   about_Server(ns_about, lst_company)
   

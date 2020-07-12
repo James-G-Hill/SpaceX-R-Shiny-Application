@@ -21,7 +21,7 @@ about_Server <- function(id, lst_company) {
   
   shiny::moduleServer(
     id,
-    function(input, output, server) {
+    function(input, output, session) {
       
       output$ns_about <-
         shiny::renderUI(
