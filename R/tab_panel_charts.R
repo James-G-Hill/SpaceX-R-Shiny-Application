@@ -34,6 +34,7 @@ charts_Server <- function(id, tbl_combined) {
                 upcoming,
                 flight_year,
                 launchpad_name,
+                region,
                 rocket_name
               )
           }

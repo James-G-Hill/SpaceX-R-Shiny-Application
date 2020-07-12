@@ -2,6 +2,7 @@
 
 ns_plot <- "ns_plot"
 ns_launchpad <- "launchpads"
+ns_region <- "region"
 ns_rocket <- "rockets"
 ns_years <- "years"
 
@@ -18,9 +19,15 @@ row_chart_cum_UI <- function(id) {
       left_col_width,
       shiny::wellPanel(
         shiny::h4("Filter Flights"),
-        shiny::uiOutput(ns(ns_years)),
-        shiny::uiOutput(ns(ns_rocket)),
-        shiny::uiOutput(ns(ns_launchpad))
+        shiny::hr(),
+        shiny::fluidRow(
+          shiny::column(6, shiny::uiOutput(ns(ns_years))),
+          shiny::column(6, shiny::uiOutput(ns(ns_rocket)))
+        ),
+        shiny::fluidRow(
+          shiny::column(6, shiny::uiOutput(ns(ns_launchpad))),
+          shiny::column(6, shiny::uiOutput(ns(ns_region)))
+        )
       )
     ),
     shiny::column(
@@ -47,7 +54,7 @@ row_chart_cum_Server <- function(id, tbl_cum) {
           {
             shiny::sliderInput(
               ns("year_slider"),
-              label = "Launch Year",
+              label = "Flight Year",
               min = min_flight_year(),
               max = max_flight_year(),
               value = c(
@@ -90,8 +97,21 @@ row_chart_cum_Server <- function(id, tbl_cum) {
           {
             shiny::selectInput(
               ns("launchpad_select"),
-              label = "Launchpad",
+              label = "Launchpad Name",
               choices = c("All", unique_launchpads())
+            )
+          }
+        )
+      
+      unique_regions <- shiny::reactive({ unique(tbl_cum()$region) })
+      
+      output$region <-
+        shiny::renderUI(
+          {
+            shiny::selectInput(
+              ns("region_select"),
+              label = "Region",
+              choices = c("All", unique_regions())
             )
           }
         )
@@ -116,6 +136,10 @@ row_chart_cum_Server <- function(id, tbl_cum) {
                 launchpad_name %in% dplyr::case_when(
                   input$launchpad_select == "All" ~ unique_launchpads(),
                   TRUE ~ input$launchpad_select
+                ),
+                region %in% dplyr::case_when(
+                  input$region_select == "All" ~ unique_regions(),
+                  TRUE ~ input$region_select
                 )
               ) %>%
               dplyr::mutate(
