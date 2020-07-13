@@ -30,6 +30,8 @@ charts_Server <- function(id, tbl_combined) {
             tbl_combined() %>%
               dplyr::select(
                 flight_date,
+                flight_name,
+                flight_number,
                 success,
                 upcoming,
                 flight_year,

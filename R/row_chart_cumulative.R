@@ -154,6 +154,19 @@ row_chart_cum_Server <- function(id, tbl_cum) {
               ) +
               ggplot2::geom_step() +
               ggplot2::geom_point() +
+              ggrepel::geom_label_repel(
+                data = function(x) { dplyr::filter(x, !success)},
+                ggplot2::aes(
+                  label = stringr::str_c(
+                    flight_number,
+                    flight_name,
+                    sep = " - "
+                  )
+                ),
+                point.padding = 1,
+                direction = "y",
+                force = 3
+              ) +
               ggplot2::scale_y_continuous(
                 labels = scales::percent,
                 limits = c(0, 1)
