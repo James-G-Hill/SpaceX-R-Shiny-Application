@@ -50,7 +50,7 @@ data_Server <- function(id, lst_tbls) {
   
   shiny::moduleServer(
     id,
-    function(input, output, server) {
+    function(input, output, session) {
       
       tbl <-
         shiny::reactive(

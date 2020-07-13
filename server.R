@@ -1,10 +1,10 @@
 # Sources ----------------------------------------------------------------------
 
-source(file = file.path("R", "utils_get_data.R"), local = TRUE)
+source(file.path("R", "utils_get_data.R"), local = TRUE)
 
 # Function ---------------------------------------------------------------------
 
-server <- function(input, output) {
+server <- function(input, output, session) {
   
   timer <- shiny::reactiveTimer(m_per_h * s_per_m * ms_per_s)
   
@@ -57,7 +57,7 @@ server <- function(input, output) {
       }
     )
   
-  lst_tbls <- reactiveValues()
+  lst_tbls <- shiny::reactiveValues()
   
   lst_tbls$launches <- tbl_launches
   lst_tbls$launchpads <- tbl_launchpads
