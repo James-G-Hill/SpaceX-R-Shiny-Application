@@ -11,6 +11,16 @@ about_UI <- function(id) {
   shiny::tabPanel(
     title = "About",
     shiny::htmlOutput(
+      style =
+        glue::glue(
+          "
+          width: 35%;
+          text-align: center;
+          align: center;
+          margin-left: auto;
+          margin-right: auto;
+          "
+      ),
       ns(ns_about)
     )
   )
@@ -90,7 +100,7 @@ tags_links <- function(lst_company) {
   shiny::tagList(
     shiny::h2("Links"),
     shiny::br(),
-    shiny::a(href = lst_company()$links$website, "SpaceX Website"),
+    shiny::a(href = lst_company()$links$website, "SpaceX"),
     shiny::br(),
     shiny::a(href = lst_company()$links$flickr, "Flickr"),
     shiny::br(),

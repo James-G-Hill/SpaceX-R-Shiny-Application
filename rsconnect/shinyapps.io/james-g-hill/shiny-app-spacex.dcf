@@ -5,6 +5,8 @@ account: james-g-hill
 server: shinyapps.io
 hostUrl: https://api.shinyapps.io/v1
 appId: 2563722
-bundleId: 3383815
+bundleId: 3384127
 url: https://james-g-hill.shinyapps.io/shiny-app-spacex/
-when: 1594596745.60518
+when: 1594604727.99856
+asMultiple: FALSE
+asStatic: FALSE
