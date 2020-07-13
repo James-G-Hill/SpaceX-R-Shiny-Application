@@ -51,7 +51,12 @@ charts_Server <- function(id, tbl_combined) {
             tbl_combined() %>%
               dplyr::mutate(
                 engine_number = as.character(engine_number),
-                flight_year = as.character(flight_year)
+                flight_year = as.character(flight_year),
+                success = dplyr::case_when(
+                  is.na(success) ~ "upcoming",
+                  !success ~ "failure",
+                  TRUE ~ "success"
+                )
               ) %>%
               dplyr::select(
                 success,

@@ -153,7 +153,18 @@ row_chart_cum_Server <- function(id, tbl_cum) {
                 )
               ) +
               ggplot2::geom_step() +
-              ggplot2::geom_point() +
+              ggplot2::geom_point(
+                data = function(x) { dplyr::filter(x, success)},
+                fill = "palegreen4",
+                size = 3,
+                shape = 24
+              ) +
+              ggplot2::geom_point(
+                data = function(x) { dplyr::filter(x, !success)},
+                fill = "firebrick3",
+                size = 3,
+                shape = 25
+              ) +
               ggrepel::geom_label_repel(
                 data = function(x) { dplyr::filter(x, !success)},
                 ggplot2::aes(
@@ -173,6 +184,7 @@ row_chart_cum_Server <- function(id, tbl_cum) {
               ) +
               ggplot2::labs(
                 title = "Cumulative Success Rate of SpaceX Launches",
+                x = "flight date",
                 y = "cumulative success rate"
               )
           }
