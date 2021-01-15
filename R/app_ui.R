@@ -10,7 +10,7 @@ app_ui <- function(request) {
     shiny::fluidPage(
       shiny::h1("Aerospace - SpaceX"),
       mod_tabPanel_charts_ui("chart"),
-      data_UI("data"),
+      mod_tabPanel_data_ui("data"),
       about_UI("about")
     )
   )
