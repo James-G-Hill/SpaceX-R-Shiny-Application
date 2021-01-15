@@ -66,8 +66,8 @@ app_server <- function(input, output, session) {
   lst_tbls$rockets <- tbl_rockets
   
   # Servers
-  charts_Server(ns_chart, tbl_combined)
-  data_Server(ns_data, lst_tbls)
-  about_Server(ns_about, lst_company)
+  mod_tabPanel_charts_server("chart", tbl_combined)
+  data_Server("data", lst_tbls)
+  about_Server("about", lst_company)
 
 }

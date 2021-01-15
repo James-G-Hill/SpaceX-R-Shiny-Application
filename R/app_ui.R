@@ -9,9 +9,9 @@ app_ui <- function(request) {
     golem_add_external_resources(),
     shiny::fluidPage(
       shiny::h1("Aerospace - SpaceX"),
-      charts_UI(ns_chart),
-      data_UI(ns_data),
-      about_UI(ns_about)
+      mod_tabPanel_charts_ui("chart"),
+      data_UI("data"),
+      about_UI("about")
     )
   )
   
