@@ -1,14 +1,3 @@
-# Variables --------------------------------------------------------------------
-
-url_base <- "https://api.spacexdata.com/v4"
-
-url_company <- glue::glue("{url_base}/company")
-url_launches <- glue::glue("{url_base}/launches")
-url_launchpads <- glue::glue("{url_base}/launchpads")
-url_rockets <- glue::glue("{url_base}/rockets")
-
-# Functions --------------------------------------------------------------------
-
 #' GET data from the SpaceX API
 #' 
 #' @param url The url of the api.
@@ -26,6 +15,9 @@ get_api_data <- function(url) {
 #' 
 get_api_company <- function() {
   
+  url_base <- "https://api.spacexdata.com/v4"
+  url_company <- glue::glue("{url_base}/company")
+  
   get_api_data(url_company)
   
 }
@@ -35,6 +27,9 @@ get_api_company <- function() {
 #' @return A list of the 'launches' data points.
 #' 
 get_api_launches <- function() {
+  
+  url_base <- "https://api.spacexdata.com/v4"
+  url_launches <- glue::glue("{url_base}/launches")
   
   get_api_data(url_launches) %>%
     dplyr::mutate(
@@ -65,6 +60,9 @@ get_api_launches <- function() {
 #' 
 get_api_launchpads <- function() {
   
+  url_base <- "https://api.spacexdata.com/v4"
+  url_launchpads <- glue::glue("{url_base}/launchpads")
+  
   get_api_data(url_launchpads) %>%
     dplyr::select(
       id_launchpad = id,
@@ -84,6 +82,9 @@ get_api_launchpads <- function() {
 #' @return A list of the 'rockets' data points.
 #' 
 get_api_rockets <- function() {
+  
+  url_base <- "https://api.spacexdata.com/v4"
+  url_rockets <- glue::glue("{url_base}/rockets")
   
   get_api_data(url_rockets) %>%
     dplyr::mutate(
