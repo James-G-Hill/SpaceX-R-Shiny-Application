@@ -1,15 +1,13 @@
-# Variables --------------------------------------------------------------------
-
-ns_plot <- "ns_plot"
-ns_upcoming <- "ns_upcoming"
-ns_vars <- "ns_vars"
-
-# Functions --------------------------------------------------------------------
-
-row_chart_raw_UI <- function(id) {
+#' UI Chart Raw
+#'
+#' @param id The namespace identifier.
+#' @noRd
+#' 
+mod_chart_raw_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
+  column_width <- 12 # total no. of columns in fluidRow
   left_col_width <- 4
   
   shiny::fluidRow(
@@ -18,25 +16,31 @@ row_chart_raw_UI <- function(id) {
       shiny::wellPanel(
         shiny::h4("Filter Factors"),
         shiny::hr(),
-        shiny::uiOutput(ns(ns_years)),
+        shiny::uiOutput(ns("ns_years")),
         shiny::selectInput(
-          ns(ns_upcoming),
+          ns("ns_upcoming"),
           "Include Upcoming Launches?",
           choices = c("Yes", "No"),
           selected = "Yes"
         ),
-        shiny::uiOutput(ns(ns_vars))
+        shiny::uiOutput(ns("ns_vars"))
       )
     ),
     shiny::column(
       column_width - left_col_width,
-      plotOutput(ns(ns_plot))
+      plotOutput(ns("ns_plot"))
     )
   )
   
 }
 
-row_chart_raw_Server <- function(id, tbl_raw) {
+#' Server Chart Raw
+#' 
+#' @param id The namespace identifier.
+#' @param tbl_raw The raw data.
+#' @noRd
+#' 
+mod_chart_raw_server <- function(id, tbl_raw) {
   
   shiny::moduleServer(
     id,
@@ -46,24 +50,22 @@ row_chart_raw_Server <- function(id, tbl_raw) {
       
       unique_var_names <-
         shiny::reactive(
-          {
-            tbl_raw() %>%
-              dplyr::select(-success, -upcoming) %>%
-              names()
-          }
+          tbl_raw() %>%
+            dplyr::select(-success, -upcoming) %>%
+            names()
         )
       
       output$ns_vars <-
         shiny::renderUI(
-          {
-            shiny::selectInput(
-              ns("select_var"),
-              label = "Select Variable",
-              choices = unique_var_names(),
-              selected = unique_var_names()[1]
-            )
-          }
+          shiny::selectInput(
+            ns("select_var"),
+            label = "Select Variable",
+            choices = unique_var_names(),
+            selected = unique_var_names()[1]
+          )
         )
+      
+      ggplot_res <- 96 # best resolution for ggplot2 plots
       
       output$ns_plot <-
         shiny::renderPlot(
@@ -108,5 +110,5 @@ row_chart_raw_Server <- function(id, tbl_raw) {
       
     }
   )
-  
+ 
 }

@@ -7,6 +7,7 @@ mod_chart_cumulative_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
+  column_width <- 12 # total no. of columns in fluidRow
   left_col_width <- 4
   
   shiny::fluidRow(
