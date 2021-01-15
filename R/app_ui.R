@@ -30,7 +30,7 @@ app_ui <- function(request) {
 golem_add_external_resources <- function() {
   
   golem::add_resource_path("www", app_sys("app/www"))
- 
+  
   shiny::tags$head(
     golem::favicon(),
     golem::bundle_resources(

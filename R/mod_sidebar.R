@@ -17,8 +17,13 @@ mod_sidebar_ui <- function(id) {
       id = ns("sidebar"),
       compact = TRUE,
       bs4Dash::bs4SidebarMenuItem(
-        "Charts",
-        tabName = "tab_charts",
+        "Charts Cumulative",
+        tabName = "tab_charts_cum",
+        icon = "chart-line"
+      ),
+      bs4Dash::bs4SidebarMenuItem(
+        "Charts Raw",
+        tabName = "tab_charts_raw",
         icon = "chart-bar"
       ),
       bs4Dash::bs4SidebarMenuItem(

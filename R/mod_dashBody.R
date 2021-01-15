@@ -9,7 +9,8 @@ mod_dashBody_ui <- function(id) {
   
   bs4Dash::bs4DashBody(
     bs4Dash::bs4TabItems(
-      mod_tabPanel_charts_ui("chart"),
+      mod_tabPanel_charts_cum_ui("chart_cum"),
+      mod_tabPanel_charts_raw_ui("chart_raw"),
       mod_tabPanel_data_ui("data"),
       mod_tabPanel_about_ui("about")
     )
@@ -29,7 +30,8 @@ mod_dashBody_server <- function(id, datasets) {
     id,
     function(input, output, session) {
     
-      mod_tabPanel_charts_server("chart", datasets$tbl_combined)
+      mod_tabPanel_charts_cum_server("chart_cum", datasets$tbl_combined)
+      mod_tabPanel_charts_raw_server("chart_raw", datasets$tbl_combined)
       mod_tabPanel_data_server("data", datasets$lst_tbls)
       mod_tabPanel_about_server("about", datasets$lst_company)
    
