@@ -14,6 +14,16 @@ RoxygenNote: 6.1.1
 Imports: 
     config,
     curl,
+    dplyr,
+    ggplot2,
+    ggrepel,
+    glue,
     golem,
+    jsonlite,
+    lubridate,
     magrittr,
-    shiny
+    purrr,
+    scales,
+    shiny,
+    stringr,
+    writexl
