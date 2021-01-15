@@ -28,23 +28,20 @@ mod_tabPanel_charts_cum_server <- function(id, tbl_combined) {
     function(input, output, session) {
       
       tbl_cum <-
-        shiny::reactive(
-          tbl_combined %>%
-            dplyr::select(
-              .data$flight_date,
-              .data$flight_name,
-              .data$flight_number,
-              .data$success,
-              .data$upcoming,
-              .data$flight_year,
-              .data$launchpad_name,
-              .data$region,
-              .data$rocket_name
-            )
-        )
+        tbl_combined %>%
+          dplyr::select(
+            .data$flight_date,
+            .data$flight_name,
+            .data$flight_number,
+            .data$success,
+            .data$upcoming,
+            .data$flight_year,
+            .data$launchpad_name,
+            .data$region,
+            .data$rocket_name
+          )
       
-      output$ns_chart_cum <-
-        mod_chart_cumulative_server("ns_chart_cum", tbl_cum)
+      mod_chart_cumulative_server("ns_chart_cum", tbl_cum)
       
     }
   )

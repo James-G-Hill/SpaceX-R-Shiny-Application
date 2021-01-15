@@ -9,10 +9,10 @@ mod_dashBody_ui <- function(id) {
   
   bs4Dash::bs4DashBody(
     bs4Dash::bs4TabItems(
-      mod_tabPanel_charts_cum_ui("chart_cum"),
-      mod_tabPanel_charts_raw_ui("chart_raw"),
-      mod_tabPanel_data_ui("data"),
-      mod_tabPanel_about_ui("about")
+      mod_tabPanel_charts_cum_ui(ns("chart_cum")),
+      mod_tabPanel_charts_raw_ui(ns("chart_raw")),
+      mod_tabPanel_data_ui(ns("data")),
+      mod_tabPanel_about_ui(ns("about"))
     )
   )
   

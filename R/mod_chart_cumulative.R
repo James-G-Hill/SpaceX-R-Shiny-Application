@@ -13,17 +13,29 @@ mod_chart_cumulative_ui <- function(id) {
   shiny::fluidRow(
     shiny::column(
       left_col_width,
-      shiny::wellPanel(
-        shiny::h4("Filter Flights"),
-        shiny::hr(),
-        shiny::fluidRow(
-          shiny::column(6, shiny::uiOutput(ns("ns_years"))),
-          shiny::column(6, shiny::uiOutput(ns("ns_rocket")))
-        ),
-        shiny::fluidRow(
-          shiny::column(6, shiny::uiOutput(ns("ns_launchpad"))),
-          shiny::column(6, shiny::uiOutput(ns("ns_region")))
-        )
+      shiny::sliderInput(
+        ns("years"),
+        label = "Flight Year",
+        min = 0,
+        max = 0,
+        value = c(0, 0),
+        sep = "",
+        step = 1
+      ),
+      shiny::selectInput(
+        ns("rocket"),
+        label = "Rocket Name",
+        choices = "All"
+      ),
+      shiny::selectInput(
+        ns("launchpad"),
+        label = "Launchpad Name",
+        choices = "All"
+      ),
+      shiny::selectInput(
+        ns("region"),
+        label = "Region",
+        choices = "All"
       )
     ),
     shiny::column(
@@ -47,62 +59,35 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
     id,
     function(input, output, session) {
       
-      ns <- session$ns
-      
-      min_flight_year <- shiny::reactive(min(tbl_cum()$flight_year))
-      max_flight_year <- shiny::reactive(max(tbl_cum()$flight_year))
-      
-      output$years <-
-        shiny::renderUI(
-          shiny::sliderInput(
-            ns("year_slider"),
-            label = "Flight Year",
-            min = min_flight_year(),
-            max = max_flight_year(),
-            value =
-              c(
-                min_flight_year(),
-                max_flight_year()
-              ),
-            sep = "",
-            step = 1
+      shiny::updateSliderInput(
+        session,
+        "years",
+        min = min(tbl_cum$flight_year),
+        max = max(tbl_cum$flight_year),
+        value =
+          c(
+            min(tbl_cum$flight_year),
+            max(tbl_cum$flight_year)
           )
         )
       
-      unique_rockets <-
-        shiny::reactive(unique(tbl_cum()$rocket_name))
+      shiny::updateSelectInput(
+        session,
+        "rocket",
+        choices = c("All", unique(tbl_cum$rocket_name))
+      )
       
-      output$rockets <-
-        shiny::renderUI(
-          shiny::selectInput(
-            ns("rocket_select"),
-            label = "Rocket Name",
-            choices = c("All", unique_rockets())
-          )
-        )
+      shiny::updateSelectInput(
+        session,
+        "launchpad",
+        choices = c("All", unique(tbl_cum$launchpad_name))
+      )
       
-      unique_launchpads <-
-        shiny::reactive(unique(tbl_cum()$launchpad_name))
-      
-      output$launchpads <-
-        shiny::renderUI(
-          shiny::selectInput(
-            ns("launchpad_select"),
-            label = "Launchpad Name",
-            choices = c("All", unique_launchpads())
-          )
-        )
-      
-      unique_regions <- shiny::reactive(unique(tbl_cum()$region))
-      
-      output$region <-
-        shiny::renderUI(
-          shiny::selectInput(
-            ns("region_select"),
-            label = "Region",
-            choices = c("All", unique_regions())
-          )
-        )
+      shiny::updateSelectInput(
+        session,
+        "region",
+        choices = c("All", unique(tbl_cum$region))
+      )
       
       ggplot_res <- 96 # best resolution for ggplot2 plots
       
@@ -121,15 +106,15 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
                 .data$flight_year >= input$year_slider[1],
                 .data$flight_year <= input$year_slider[2],
                 .data$rocket_name %in% dplyr::case_when(
-                  input$rocket_select == "All" ~ unique_rockets(),
+                  input$rocket_select == "All" ~ unique(tbl_cum$rocket_name),
                   TRUE ~ input$rocket_select
                 ),
                 .data$launchpad_name %in% dplyr::case_when(
-                  input$launchpad_select == "All" ~ unique_launchpads(),
+                  input$launchpad_select == "All" ~ unique(tbl_cum$launchpad_name),
                   TRUE ~ input$launchpad_select
                 ),
                 .data$region %in% dplyr::case_when(
-                  input$region_select == "All" ~ unique_regions(),
+                  input$region_select == "All" ~ unique(tbl_cum$region),
                   TRUE ~ input$region_select
                 )
               ) %>%
