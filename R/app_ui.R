@@ -7,11 +7,14 @@ app_ui <- function(request) {
   
   shiny::tagList(
     golem_add_external_resources(),
-    shiny::fluidPage(
-      shiny::h1("Aerospace - SpaceX"),
-      mod_tabPanel_charts_ui("chart"),
-      mod_tabPanel_data_ui("data"),
-      mod_tabPanel_about_ui("about")
+    bs4Dash::bs4DashPage(
+      sidebar_min = FALSE,
+      controlbar_collapsed = TRUE,
+      controlbar_overlay = TRUE,
+      title = "Aerospace - SpaceX",
+      navbar = mod_navbar_ui("navbar"),
+      sidebar = mod_sidebar_ui("sidebar"),
+      body = mod_dashBody_ui("dashbody")
     )
   )
   

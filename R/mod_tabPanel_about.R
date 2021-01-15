@@ -7,8 +7,8 @@ mod_tabPanel_about_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
-  shiny::tabPanel(
-    title = "About",
+  bs4Dash::bs4TabItem(
+    tabName = "tab_about",
     shiny::htmlOutput(
       style =
         glue::glue(

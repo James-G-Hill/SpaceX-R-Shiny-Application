@@ -7,13 +7,13 @@ mod_tabPanel_charts_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
-  shiny::tabPanel(
-    title = "Charts",
+  bs4Dash::bs4TabItem(
+    tabName = "tab_charts",
     mod_chart_cumulative_ui(ns("ns_chart_cum")),
     shiny::hr(),
     mod_chart_raw_ui(ns("ns_chart_raw"))
   )
-  
+
 }
   
 #' Server Charts TabPanel

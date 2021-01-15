@@ -10,8 +10,8 @@ mod_tabPanel_data_ui <- function(id) {
   column_width <- 12
   radio_col_width <- 6
   
-  shiny::tabPanel(
-    title = "Data",
+  bs4Dash::bs4TabItem(
+    tabName = "tab_data",
     shiny::fluidRow(
       shiny::column(
         radio_col_width,

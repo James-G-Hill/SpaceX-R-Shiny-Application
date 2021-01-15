@@ -11,8 +11,6 @@ app_server <- function(input, output, session) {
     datasets <- golem::get_golem_options("data")
   }
   
-  mod_tabPanel_charts_server("chart", datasets$tbl_combined)
-  mod_tabPanel_data_server("data", datasets$lst_tbls)
-  mod_tabPanel_about_server("about", datasets$lst_company)
+  mod_dashBody_server("dashbody", datasets)
 
 }
