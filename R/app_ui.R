@@ -11,7 +11,7 @@ app_ui <- function(request) {
       shiny::h1("Aerospace - SpaceX"),
       mod_tabPanel_charts_ui("chart"),
       mod_tabPanel_data_ui("data"),
-      about_UI("about")
+      mod_tabPanel_about_ui("about")
     )
   )
   

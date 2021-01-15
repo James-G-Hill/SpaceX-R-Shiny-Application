@@ -68,6 +68,6 @@ app_server <- function(input, output, session) {
   # Servers
   mod_tabPanel_charts_server("chart", tbl_combined)
   mod_tabPanel_data_server("data", lst_tbls)
-  about_Server("about", lst_company)
+  mod_tabPanel_about_server("about", lst_company)
 
 }
