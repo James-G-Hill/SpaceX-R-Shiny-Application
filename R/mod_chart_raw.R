@@ -13,17 +13,16 @@ mod_chart_raw_ui <- function(id) {
   shiny::fluidRow(
     shiny::column(
       left_col_width,
-      shiny::wellPanel(
-        shiny::h4("Filter Factors"),
-        shiny::hr(),
-        shiny::uiOutput(ns("ns_years")),
-        shiny::selectInput(
-          ns("ns_upcoming"),
-          "Include Upcoming Launches?",
-          choices = c("Yes", "No"),
-          selected = "Yes"
-        ),
-        shiny::uiOutput(ns("ns_vars"))
+      shiny::selectInput(
+        ns("ns_upcoming"),
+        "Include Upcoming Launches?",
+        choices = c("Yes", "No"),
+        selected = "Yes"
+      ),
+      shiny::selectInput(
+        ns("select_var"),
+        label = "Select Variable",
+        choices = NULL
       )
     ),
     shiny::column(
@@ -47,24 +46,17 @@ mod_chart_raw_server <- function(id, tbl_raw) {
     id,
     function(input, output, session) {
       
-      ns <- session$ns
-      
       unique_var_names <-
-        shiny::reactive(
-          tbl_raw() %>%
-            dplyr::select(-.data$success, -.data$upcoming) %>%
-            names()
-        )
+        tbl_raw %>%
+          dplyr::select(-.data$success, -.data$upcoming) %>%
+          names()
       
-      output$ns_vars <-
-        shiny::renderUI(
-          shiny::selectInput(
-            ns("select_var"),
-            label = "Select Variable",
-            choices = unique_var_names(),
-            selected = unique_var_names()[1]
-          )
-        )
+      shiny::updateSelectInput(
+        session,
+        "select_var",
+        choices = unique_var_names,
+        selected = unique_var_names[1]
+      )
       
       ggplot_res <- 96 # best resolution for ggplot2 plots
       
@@ -76,7 +68,7 @@ mod_chart_raw_server <- function(id, tbl_raw) {
               input$ns_upcoming,
               input$select_var
             )
-            tbl_raw() %>%
+            tbl_raw %>%
               dplyr::filter(
                 .data$upcoming %in% dplyr::case_when(
                   input$ns_upcoming == "Yes" ~ c(TRUE, FALSE),

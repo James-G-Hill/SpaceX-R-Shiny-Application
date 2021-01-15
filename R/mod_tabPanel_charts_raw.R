@@ -28,31 +28,29 @@ mod_tabPanel_charts_raw_server <- function(id, tbl_combined) {
     function(input, output, session) {
       
       tbl_raw <-
-        shiny::reactive(
-          tbl_combined %>%
-            dplyr::mutate(
-              engine_number = as.character(.data$engine_number),
-              flight_year = as.character(.data$flight_year),
-              success =
-                dplyr::case_when(
-                  is.na(.data$success) ~ "upcoming",
-                  !.data$success ~ "failure",
-                  TRUE ~ "success"
-                )
-            ) %>%
-            dplyr::select(
-              .data$success,
-              .data$upcoming,
-              .data$crewed,
-              .data$engine_layout,
-              .data$engine_number,
-              .data$flight_year,
-              .data$launchpad_name,
-              .data$locality,
-              .data$region,
-              .data$rocket_name
-            )
-        )
+        tbl_combined %>%
+          dplyr::mutate(
+            engine_number = as.character(.data$engine_number),
+            flight_year = as.character(.data$flight_year),
+            success =
+              dplyr::case_when(
+                is.na(.data$success) ~ "upcoming",
+                !.data$success ~ "failure",
+                TRUE ~ "success"
+              )
+          ) %>%
+          dplyr::select(
+            .data$success,
+            .data$upcoming,
+            .data$crewed,
+            .data$engine_layout,
+            .data$engine_number,
+            .data$flight_year,
+            .data$launchpad_name,
+            .data$locality,
+            .data$region,
+            .data$rocket_name
+          )
       
       output$ns_chart_raw <-
         mod_chart_raw_server("ns_chart_raw", tbl_raw)
