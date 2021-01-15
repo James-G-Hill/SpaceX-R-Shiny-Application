@@ -5,7 +5,7 @@
 #' 
 mod_card_links_ui <- function(id) {
   
-  ns <- NS(id)
+  ns <- shiny::NS(id)
   
   shiny::uiOutput(ns("links"))
   
