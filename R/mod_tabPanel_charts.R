@@ -9,7 +9,7 @@ mod_tabPanel_charts_ui <- function(id) {
   
   shiny::tabPanel(
     title = "Charts",
-    row_chart_cum_UI(ns("ns_chart_cum")),
+    mod_chart_cumulative_ui(ns("ns_chart_cum")),
     shiny::hr(),
     row_chart_raw_UI(ns("ns_chart_raw"))
   )
@@ -45,7 +45,7 @@ mod_tabPanel_charts_server <- function(id, tbl_combined) {
         )
       
       output$ns_chart_cum <-
-        row_chart_cum_Server("ns_chart_cum", tbl_cum)
+        mod_chart_cumulative_server("ns_chart_cum", tbl_cum)
       
       tbl_raw <-
         shiny::reactive(
