@@ -11,7 +11,7 @@ mod_tabPanel_charts_ui <- function(id) {
     title = "Charts",
     mod_chart_cumulative_ui(ns("ns_chart_cum")),
     shiny::hr(),
-    row_chart_raw_UI(ns("ns_chart_raw"))
+    mod_chart_raw_ui(ns("ns_chart_raw"))
   )
   
 }
@@ -21,6 +21,7 @@ mod_tabPanel_charts_ui <- function(id) {
 #' @param id The namespace identifier.
 #' @param tbl_combined The combined tables.
 #' @noRd
+#' @importFrom dplyr .data
 #' 
 mod_tabPanel_charts_server <- function(id, tbl_combined) {
   
@@ -32,15 +33,15 @@ mod_tabPanel_charts_server <- function(id, tbl_combined) {
         shiny::reactive(
           tbl_combined() %>%
             dplyr::select(
-              flight_date,
-              flight_name,
-              flight_number,
-              success,
-              upcoming,
-              flight_year,
-              launchpad_name,
-              region,
-              rocket_name
+              .data$flight_date,
+              .data$flight_name,
+              .data$flight_number,
+              .data$success,
+              .data$upcoming,
+              .data$flight_year,
+              .data$launchpad_name,
+              .data$region,
+              .data$rocket_name
             )
         )
       
@@ -51,31 +52,31 @@ mod_tabPanel_charts_server <- function(id, tbl_combined) {
         shiny::reactive(
           tbl_combined() %>%
             dplyr::mutate(
-              engine_number = as.character(engine_number),
-              flight_year = as.character(flight_year),
+              engine_number = as.character(.data$engine_number),
+              flight_year = as.character(.data$flight_year),
               success =
                 dplyr::case_when(
-                  is.na(success) ~ "upcoming",
-                  !success ~ "failure",
+                  is.na(.data$success) ~ "upcoming",
+                  !.data$success ~ "failure",
                   TRUE ~ "success"
                 )
             ) %>%
             dplyr::select(
-              success,
-              upcoming,
-              crewed,
-              engine_layout,
-              engine_number,
-              flight_year,
-              launchpad_name,
-              locality,
-              region,
-              rocket_name
+              .data$success,
+              .data$upcoming,
+              .data$crewed,
+              .data$engine_layout,
+              .data$engine_number,
+              .data$flight_year,
+              .data$launchpad_name,
+              .data$locality,
+              .data$region,
+              .data$rocket_name
             )
         )
       
       output$ns_chart_raw <-
-        row_chart_raw_Server("ns_chart_raw", tbl_raw)
+        mod_chart_raw_server("ns_chart_raw", tbl_raw)
       
     }
   )

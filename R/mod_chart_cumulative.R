@@ -39,6 +39,7 @@ mod_chart_cumulative_ui <- function(id) {
 #' @param id The namespace identifier.
 #' @param tbl_cum The cumulative table.
 #' @noRd
+#' @importFrom dplyr .data
 #' 
 mod_chart_cumulative_server <- function(id, tbl_cum) {
   
@@ -116,49 +117,53 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
             )
             tbl_cum() %>%
               dplyr::filter(
-                !upcoming,
-                flight_year >= input$year_slider[1],
-                flight_year <= input$year_slider[2],
-                rocket_name %in% dplyr::case_when(
+                !.data$upcoming,
+                .data$flight_year >= input$year_slider[1],
+                .data$flight_year <= input$year_slider[2],
+                .data$rocket_name %in% dplyr::case_when(
                   input$rocket_select == "All" ~ unique_rockets(),
                   TRUE ~ input$rocket_select
                 ),
-                launchpad_name %in% dplyr::case_when(
+                .data$launchpad_name %in% dplyr::case_when(
                   input$launchpad_select == "All" ~ unique_launchpads(),
                   TRUE ~ input$launchpad_select
                 ),
-                region %in% dplyr::case_when(
+                .data$region %in% dplyr::case_when(
                   input$region_select == "All" ~ unique_regions(),
                   TRUE ~ input$region_select
                 )
               ) %>%
               dplyr::mutate(
-                cum_success = cumsum(success) / dplyr::row_number()
+                cum_success = cumsum(.data$success) / dplyr::row_number()
               ) %>%
               ggplot2::ggplot(
                 ggplot2::aes(
-                  x = flight_date,
-                  y = cum_success
+                  x = .data$flight_date,
+                  y = .data$cum_success
                 )
               ) +
               ggplot2::geom_step() +
               ggplot2::geom_point(
-                data = function(x) { dplyr::filter(x, success)},
+                data = function(x) { dplyr::filter(x, .data$success)},
                 fill = "palegreen4",
                 size = 3,
                 shape = 24
               ) +
               ggplot2::geom_point(
-                data = function(x) { dplyr::filter(x, !success)},
+                data = function(x) { dplyr::filter(x, !.data$success)},
                 fill = "firebrick3",
                 size = 3,
                 shape = 25
               ) +
               ggrepel::geom_label_repel(
-                data = function(x) { dplyr::filter(x, !success)},
+                data = function(x) { dplyr::filter(x, !.data$success)},
                 ggplot2::aes(
                   label =
-                    stringr::str_c(flight_number, flight_name, sep = " - ")
+                    stringr::str_c(
+                      .data$flight_number,
+                      .data$flight_name,
+                      sep = " - "
+                    )
                 ),
                 point.padding = 1,
                 direction = "y",

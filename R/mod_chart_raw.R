@@ -39,6 +39,7 @@ mod_chart_raw_ui <- function(id) {
 #' @param id The namespace identifier.
 #' @param tbl_raw The raw data.
 #' @noRd
+#' @importFrom dplyr .data
 #' 
 mod_chart_raw_server <- function(id, tbl_raw) {
   
@@ -51,7 +52,7 @@ mod_chart_raw_server <- function(id, tbl_raw) {
       unique_var_names <-
         shiny::reactive(
           tbl_raw() %>%
-            dplyr::select(-success, -upcoming) %>%
+            dplyr::select(-.data$success, -.data$upcoming) %>%
             names()
         )
       
@@ -77,7 +78,7 @@ mod_chart_raw_server <- function(id, tbl_raw) {
             )
             tbl_raw() %>%
               dplyr::filter(
-                upcoming %in% dplyr::case_when(
+                .data$upcoming %in% dplyr::case_when(
                   input$ns_upcoming == "Yes" ~ c(TRUE, FALSE),
                   TRUE ~ FALSE
                 )

@@ -3,4 +3,5 @@
 export("%>%")
 export(run_app)
 import(shiny)
+importFrom(dplyr,.data)
 importFrom(magrittr,"%>%")
