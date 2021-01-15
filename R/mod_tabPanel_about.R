@@ -9,18 +9,17 @@ mod_tabPanel_about_ui <- function(id) {
   
   bs4Dash::bs4TabItem(
     tabName = "tab_about",
-    shiny::htmlOutput(
-      style =
-        glue::glue(
-          "
-          width: 35%;
-          text-align: center;
-          align: center;
-          margin-left: auto;
-          margin-right: auto;
-          "
-        ),
-      ns("ns_about")
+    shiny::fluidRow(
+      shiny::column(
+        6,
+        mod_card_summary_ui(ns("summary")),
+        mod_card_staff_ui(ns("staff")),
+      ),
+      shiny::column(
+        6,
+        mod_card_links_ui(ns("links")),
+        mod_card_address_ui(ns("address"))
+      )
     )
   )
   
@@ -38,20 +37,10 @@ mod_tabPanel_about_server <- function(id, lst_company) {
     id,
     function(input, output, session) {
       
-      output$ns_about <-
-        shiny::renderUI(
-          shiny::tagList(
-            shiny::h1(lst_company$name),
-            shiny::br(),
-            shiny::p(lst_company$summary),
-            shiny::hr(),
-            tags_staff(lst_company),
-            shiny::hr(),
-            tags_links(lst_company),
-            shiny::hr(),
-            tags_address(lst_company)
-          )
-        )
+      mod_card_summary_server("summary", lst_company$summary)
+      mod_card_staff_server("staff", lst_company)
+      mod_card_links_server("links", lst_company)
+      mod_card_address_server("address", lst_company)
       
     }
   )
