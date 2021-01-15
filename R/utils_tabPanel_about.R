@@ -9,21 +9,21 @@ tags_staff <- function(lst_company) {
     shiny::h2("Staff"),
     shiny::br(),
     shiny::p(
-      stringr::str_c("Founder", lst_company()$founder, sep = " : ")
+      stringr::str_c("Founder", lst_company$founder, sep = " : ")
     ),
     shiny::p(
-      stringr::str_c("CEO", lst_company()$ceo, sep = " : ")
+      stringr::str_c("CEO", lst_company$ceo, sep = " : ")
     ),
     shiny::p(
-      stringr::str_c("CTO", lst_company()$cto, sep = " : ")
+      stringr::str_c("CTO", lst_company$cto, sep = " : ")
     ),
     shiny::p(
-      stringr::str_c("COO", lst_company()$coo, sep = " : ")
+      stringr::str_c("COO", lst_company$coo, sep = " : ")
     ),
     shiny::p(
       stringr::str_c(
         "CTO Propulsion",
-        lst_company()$cto_propulsion,
+        lst_company$cto_propulsion,
         sep = " : "
       )
     )
@@ -41,13 +41,13 @@ tags_links <- function(lst_company) {
   shiny::tagList(
     shiny::h2("Links"),
     shiny::br(),
-    shiny::a(href = lst_company()$links$website, "SpaceX"),
+    shiny::a(href = lst_company$links$website, "SpaceX"),
     shiny::br(),
-    shiny::a(href = lst_company()$links$flickr, "Flickr"),
+    shiny::a(href = lst_company$links$flickr, "Flickr"),
     shiny::br(),
-    shiny::a(href = lst_company()$links$twitter, "Twitter"),
+    shiny::a(href = lst_company$links$twitter, "Twitter"),
     shiny::br(),
-    shiny::a(href = lst_company()$links$elon_twitter, "Elon Musk Twitter")
+    shiny::a(href = lst_company$links$elon_twitter, "Elon Musk Twitter")
   )
   
 }
@@ -65,21 +65,21 @@ tags_address <- function(lst_company) {
     shiny::p(
       stringr::str_c(
         "Street",
-        lst_company()$headquarters$address,
+        lst_company$headquarters$address,
         sep = " : "
       )
     ),
     shiny::p(
       stringr::str_c(
         "City",
-        lst_company()$headquarters$city,
+        lst_company$headquarters$city,
         sep = " : "
       )
     ),
     shiny::p(
       stringr::str_c(
         "State",
-        lst_company()$headquarters$state,
+        lst_company$headquarters$state,
         sep = " : "
       )
     )

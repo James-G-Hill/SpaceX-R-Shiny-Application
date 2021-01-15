@@ -8,5 +8,9 @@ golem::detach_all_attached()
 # Document and reload your package
 golem::document_and_reload()
 
-# Run the application
-run_app()
+datasets <- readRDS(here::here("dev/data/datasets.RDS"))
+
+spacex.app::run_app(
+  options = list(launch.browser = TRUE),
+  data = datasets
+)

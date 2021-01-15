@@ -41,9 +41,9 @@ mod_tabPanel_about_server <- function(id, lst_company) {
       output$ns_about <-
         shiny::renderUI(
           shiny::tagList(
-            shiny::h1(lst_company()$name),
+            shiny::h1(lst_company$name),
             shiny::br(),
-            shiny::p(lst_company()$summary),
+            shiny::p(lst_company$summary),
             shiny::hr(),
             tags_staff(lst_company),
             shiny::hr(),

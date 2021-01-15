@@ -1,73 +1,18 @@
 #' The application server-side
 #' 
 #' @param input,output,session Internal parameters for {shiny}.
-#' @import shiny
 #' @noRd
 #' 
 app_server <- function(input, output, session) {
   
-  ms_per_s <- 1000 # milliseconds per second
-  s_per_m <- 60 # seconds per minutes
-  m_per_h <- 60 # minutes per hour
+  if (golem::app_prod()) {
+    datasets <- get_data()
+  } else {
+    datasets <- golem::get_golem_options("data")
+  }
   
-  timer <- shiny::reactiveTimer(m_per_h * s_per_m * ms_per_s)
-  
-  # Tables
-  
-  lst_company <-
-    shiny::reactive(
-      {
-        timer()
-        get_api_company()
-      }
-    )
-  
-  tbl_launches <-
-    shiny::reactive(
-      {
-        timer()
-        get_api_launches()
-      }
-    )
-  
-  tbl_launchpads <-
-    shiny::reactive(
-      {
-        timer()
-        get_api_launchpads()
-      }
-    )
-  
-  tbl_rockets <-
-    shiny::reactive(
-      {
-        timer()
-        get_api_rockets()
-      }
-    )
-  
-  tbl_combined <-
-    shiny::reactive(
-      tbl_launches() %>%
-        dplyr::left_join(
-          tbl_launchpads(),
-          by = c("id_launchpad" = "id_launchpad")
-        ) %>%
-        dplyr::left_join(
-          tbl_rockets(),
-          by = c("id_rocket" = "id_rocket")
-        )
-    )
-  
-  lst_tbls <- shiny::reactiveValues()
-  
-  lst_tbls$launches <- tbl_launches
-  lst_tbls$launchpads <- tbl_launchpads
-  lst_tbls$rockets <- tbl_rockets
-  
-  # Servers
-  mod_tabPanel_charts_server("chart", tbl_combined)
-  mod_tabPanel_data_server("data", lst_tbls)
-  mod_tabPanel_about_server("about", lst_company)
+  mod_tabPanel_charts_server("chart", datasets$tbl_combined)
+  mod_tabPanel_data_server("data", datasets$lst_tbls)
+  mod_tabPanel_about_server("about", datasets$lst_company)
 
 }

@@ -56,9 +56,9 @@ mod_tabPanel_data_server <- function(id, lst_tbls) {
         shiny::reactive(
           switch(
             input$ns_radio,
-            "Launches" = lst_tbls$launches(),
-            "Launchpads" = lst_tbls$launchpads(),
-            "Rockets" = lst_tbls$rockets()
+            "Launches" = lst_tbls$launches,
+            "Launchpads" = lst_tbls$launchpads,
+            "Rockets" = lst_tbls$rockets
           )
         )
       

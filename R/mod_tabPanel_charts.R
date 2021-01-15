@@ -31,7 +31,7 @@ mod_tabPanel_charts_server <- function(id, tbl_combined) {
       
       tbl_cum <-
         shiny::reactive(
-          tbl_combined() %>%
+          tbl_combined %>%
             dplyr::select(
               .data$flight_date,
               .data$flight_name,
@@ -50,7 +50,7 @@ mod_tabPanel_charts_server <- function(id, tbl_combined) {
       
       tbl_raw <-
         shiny::reactive(
-          tbl_combined() %>%
+          tbl_combined %>%
             dplyr::mutate(
               engine_number = as.character(.data$engine_number),
               flight_year = as.character(.data$flight_year),

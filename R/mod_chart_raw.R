@@ -28,7 +28,7 @@ mod_chart_raw_ui <- function(id) {
     ),
     shiny::column(
       column_width - left_col_width,
-      plotOutput(ns("ns_plot"))
+      shiny::plotOutput(ns("ns_plot"))
     )
   )
   
