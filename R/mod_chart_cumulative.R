@@ -96,26 +96,27 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
           res = ggplot_res,
           {
             shiny::req(
-              input$year_slider,
-              input$rocket_select,
-              input$launchpad_select
+              input$years,
+              input$rocket,
+              input$launchpad,
+              input$region
             )
-            tbl_cum() %>%
+            tbl_cum %>%
               dplyr::filter(
                 !.data$upcoming,
-                .data$flight_year >= input$year_slider[1],
-                .data$flight_year <= input$year_slider[2],
+                .data$flight_year >= input$years[1],
+                .data$flight_year <= input$years[2],
                 .data$rocket_name %in% dplyr::case_when(
-                  input$rocket_select == "All" ~ unique(tbl_cum$rocket_name),
-                  TRUE ~ input$rocket_select
+                  input$rocket == "All" ~ unique(tbl_cum$rocket_name),
+                  TRUE ~ input$rocket
                 ),
                 .data$launchpad_name %in% dplyr::case_when(
-                  input$launchpad_select == "All" ~ unique(tbl_cum$launchpad_name),
-                  TRUE ~ input$launchpad_select
+                  input$launchpad == "All" ~ unique(tbl_cum$launchpad_name),
+                  TRUE ~ input$launchpad
                 ),
                 .data$region %in% dplyr::case_when(
-                  input$region_select == "All" ~ unique(tbl_cum$region),
-                  TRUE ~ input$region_select
+                  input$region == "All" ~ unique(tbl_cum$region),
+                  TRUE ~ input$region
                 )
               ) %>%
               dplyr::mutate(
