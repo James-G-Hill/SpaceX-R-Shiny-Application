@@ -1,18 +1,20 @@
 #' The application User-Interface
 #' 
-#' @param request Internal parameter for `{shiny}`. 
-#'     DO NOT REMOVE.
-#' @import shiny
+#' @param request Internal parameter for `{shiny}`.
 #' @noRd
+#' 
 app_ui <- function(request) {
-  tagList(
-    # Leave this function for adding external resources
+  
+  shiny::tagList(
     golem_add_external_resources(),
-    # List the first level UI elements here 
-    fluidPage(
-      h1("spacex.app")
+    shiny::fluidPage(
+      shiny::h1("Aerospace - SpaceX"),
+      charts_UI(ns_chart),
+      data_UI(ns_data),
+      about_UI(ns_about)
     )
   )
+  
 }
 
 #' Add external Resources to the Application
@@ -20,23 +22,18 @@ app_ui <- function(request) {
 #' This function is internally used to add external 
 #' resources inside the Shiny application. 
 #' 
-#' @import shiny
-#' @importFrom golem add_resource_path activate_js favicon bundle_resources
 #' @noRd
-golem_add_external_resources <- function(){
+#' 
+golem_add_external_resources <- function() {
   
-  add_resource_path(
-    'www', app_sys('app/www')
-  )
+  golem::add_resource_path("www", app_sys("app/www"))
  
-  tags$head(
-    favicon(),
-    bundle_resources(
-      path = app_sys('app/www'),
-      app_title = 'spacex.app'
+  shiny::tags$head(
+    golem::favicon(),
+    golem::bundle_resources(
+      path = app_sys("app/www"),
+      app_title = "spacex.app"
     )
-    # Add here other external resources
-    # for example, you can add shinyalert::useShinyalert() 
   )
+  
 }
-
