@@ -12,27 +12,25 @@ mod_tabPanel_data_ui <- function(id) {
   
   bs4Dash::bs4TabItem(
     tabName = "tab_data",
-    shiny::fluidRow(
-      shiny::column(
-        radio_col_width,
-        shiny::radioButtons(
-          ns("ns_radio"),
-          "Tables",
-          choices = c("Launches", "Launchpads", "Rockets"),
-          inline = TRUE
+    bs4Dash::bs4Card(
+      title = "Tables",
+      width = 12,
+      shiny::fluidRow(
+        shiny::column(
+          radio_col_width,
+          shiny::radioButtons(
+            ns("ns_radio"),
+            "Tables",
+            choices = c("Launches", "Launchpads", "Rockets"),
+            inline = TRUE
+          )
+        ),
+        shiny::column(
+          column_width - radio_col_width,
+          shiny::downloadButton(ns("ns_button"))
         )
       ),
-      shiny::column(
-        column_width - radio_col_width,
-        shiny::downloadButton(ns("ns_button"))
-      )
-    ),
-    shiny::hr(),
-    shiny::fluidRow(
-      shiny::column(
-        column_width,
-        shiny::dataTableOutput(ns("ns_datatable"))
-      )
+      shiny::dataTableOutput(ns("ns_datatable"))
     )
   )
   
@@ -59,7 +57,13 @@ mod_tabPanel_data_server <- function(id, lst_tbls) {
             "Launches" = lst_tbls$launches,
             "Launchpads" = lst_tbls$launchpads,
             "Rockets" = lst_tbls$rockets
-          )
+          ) %>%
+            dplyr::rename_with(
+              .fn = stringr::str_replace_all,
+              .cols = dplyr::everything(),
+              "_",
+              " "
+            )
         )
       
       output$ns_datatable <-
