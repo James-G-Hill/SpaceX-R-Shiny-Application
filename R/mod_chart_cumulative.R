@@ -10,37 +10,41 @@ mod_chart_cumulative_ui <- function(id) {
   column_width <- 12 # total no. of columns in fluidRow
   left_col_width <- 4
   
-  shiny::fluidRow(
-    shiny::column(
-      left_col_width,
-      shiny::sliderInput(
-        ns("years"),
-        label = "Flight Year",
-        min = 0,
-        max = 0,
-        value = c(0, 0),
-        sep = "",
-        step = 1
+  bs4Dash::bs4Card(
+    title = "Cumulative Launch Success",
+    width = 12,
+    shiny::fluidRow(
+      shiny::column(
+        left_col_width,
+        shiny::sliderInput(
+          ns("years"),
+          label = "Flight Year",
+          min = 0,
+          max = 0,
+          value = c(0, 0),
+          sep = "",
+          step = 1
+        ),
+        shiny::selectInput(
+          ns("rocket"),
+          label = "Rocket Name",
+          choices = "All"
+        ),
+        shiny::selectInput(
+          ns("launchpad"),
+          label = "Launchpad Name",
+          choices = "All"
+        ),
+        shiny::selectInput(
+          ns("region"),
+          label = "Region",
+          choices = "All"
+        )
       ),
-      shiny::selectInput(
-        ns("rocket"),
-        label = "Rocket Name",
-        choices = "All"
-      ),
-      shiny::selectInput(
-        ns("launchpad"),
-        label = "Launchpad Name",
-        choices = "All"
-      ),
-      shiny::selectInput(
-        ns("region"),
-        label = "Region",
-        choices = "All"
+      shiny::column(
+        column_width - left_col_width,
+        shiny::plotOutput(ns("ns_plot"))
       )
-    ),
-    shiny::column(
-      column_width - left_col_width,
-      shiny::plotOutput(ns("ns_plot"))
     )
   )
   

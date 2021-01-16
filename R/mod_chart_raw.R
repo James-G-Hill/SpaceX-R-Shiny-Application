@@ -10,24 +10,28 @@ mod_chart_raw_ui <- function(id) {
   column_width <- 12 # total no. of columns in fluidRow
   left_col_width <- 4
   
-  shiny::fluidRow(
-    shiny::column(
-      left_col_width,
-      shiny::selectInput(
-        ns("ns_upcoming"),
-        "Include Upcoming Launches?",
-        choices = c("Yes", "No"),
-        selected = "Yes"
+  bs4Dash::bs4Card(
+    title = "Success Rate of Launches",
+    width = 12,
+    shiny::fluidRow(
+      shiny::column(
+        left_col_width,
+        shiny::selectInput(
+          ns("ns_upcoming"),
+          "Include Upcoming Launches?",
+          choices = c("Yes", "No"),
+          selected = "Yes"
+        ),
+        shiny::selectInput(
+          ns("select_var"),
+          label = "Select Variable",
+          choices = NULL
+        )
       ),
-      shiny::selectInput(
-        ns("select_var"),
-        label = "Select Variable",
-        choices = NULL
+      shiny::column(
+        column_width - left_col_width,
+        shiny::plotOutput(ns("ns_plot"))
       )
-    ),
-    shiny::column(
-      column_width - left_col_width,
-      shiny::plotOutput(ns("ns_plot"))
     )
   )
   
