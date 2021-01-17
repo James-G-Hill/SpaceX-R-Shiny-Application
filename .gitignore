@@ -5,4 +5,4 @@
 
 datasets.RDS
 
-^rsconnect$
+rsconnect/
