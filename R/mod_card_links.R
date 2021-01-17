@@ -29,6 +29,8 @@ mod_card_links_server <- function(id, company) {
             width = 12,
             title = "Links",
             status = "dark",
+            collapsible = FALSE,
+            closable = FALSE,
             shiny::a(href = company$links$website, "SpaceX"),
             shiny::br(),
             shiny::a(href = company$links$flickr, "Flickr"),

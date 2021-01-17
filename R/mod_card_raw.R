@@ -14,6 +14,8 @@ mod_chart_raw_ui <- function(id) {
     title = "Success Rate of Launches",
     width = 12,
     status = "dark",
+    collapsible = FALSE,
+    closable = FALSE,
     shiny::fluidRow(
       shiny::column(
         left_col_width,

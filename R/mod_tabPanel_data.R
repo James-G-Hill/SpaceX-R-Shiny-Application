@@ -16,6 +16,8 @@ mod_tabPanel_data_ui <- function(id) {
       title = "Tables",
       width = 12,
       status = "dark",
+      collapsible = FALSE,
+      closable = FALSE,
       shiny::fluidRow(
         shiny::column(
           radio_col_width,

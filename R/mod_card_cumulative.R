@@ -14,6 +14,8 @@ mod_chart_cumulative_ui <- function(id) {
     title = "Cumulative Launch Success",
     width = 12,
     status = "dark",
+    collapsible = FALSE,
+    closable = FALSE,
     shiny::fluidRow(
       shiny::column(
         left_col_width,

@@ -1,6 +1,7 @@
 spacex_theme <-
   fresh::create_theme(
     fresh::bs4dash_status(
+      primary = "#8B008B",
       dark = "black"
     ),
     fresh::bs4dash_layout(

@@ -29,6 +29,8 @@ mod_card_address_server <- function(id, company) {
             width = 12,
             title = "HQ",
             status = "dark",
+            collapsible = FALSE,
+            closable = FALSE,
             shiny::p(
               stringr::str_c(
                 "Street",

@@ -29,6 +29,8 @@ mod_card_staff_server <- function(id, company) {
           width = 12,
           title = "Staff",
           status = "dark",
+          collapsible = FALSE,
+          closable = FALSE,
           shiny::p(
             stringr::str_c("Founder", company$founder, sep = " : ")
           ),
