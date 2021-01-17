@@ -9,6 +9,16 @@ The purpose is to show how an application may be designed for a corporate insure
 It allows the user to examine the success rate of SpaceX rocket launches.
 Underwriters could use the application to evaluate the risk of future rocket launches.
 
+## View the App
+
+You *may* be able to see the application at the following webpage:
+
+https://james-g-hill.shinyapps.io/shiny-app-spacex/
+
+Note that I do not regularly check the app is still available.
+It should work but it is possible that the service providers stops it.
+If that link fails then please contact me so that I can restart it.
+
 ## Features
 
 The application has the following features:
