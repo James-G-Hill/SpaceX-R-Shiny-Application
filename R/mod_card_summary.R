@@ -28,6 +28,7 @@ mod_card_summary_server <- function(id, summary) {
           bs4Dash::bs4Card(
             width = 12,
             title = "Mission Statement",
+            status = "dark",
             summary
           )
         )

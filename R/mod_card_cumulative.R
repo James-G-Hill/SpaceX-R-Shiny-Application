@@ -13,6 +13,7 @@ mod_chart_cumulative_ui <- function(id) {
   bs4Dash::bs4Card(
     title = "Cumulative Launch Success",
     width = 12,
+    status = "dark",
     shiny::fluidRow(
       shiny::column(
         left_col_width,

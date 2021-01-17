@@ -15,6 +15,7 @@ mod_tabPanel_data_ui <- function(id) {
     bs4Dash::bs4Card(
       title = "Tables",
       width = 12,
+      status = "dark",
       shiny::fluidRow(
         shiny::column(
           radio_col_width,

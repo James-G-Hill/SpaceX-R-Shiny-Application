@@ -28,6 +28,7 @@ mod_card_address_server <- function(id, company) {
           bs4Dash::bs4Card(
             width = 12,
             title = "HQ",
+            status = "dark",
             shiny::p(
               stringr::str_c(
                 "Street",

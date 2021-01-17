@@ -14,7 +14,8 @@ app_ui <- function(request) {
       title = "Aerospace - SpaceX",
       navbar = mod_navbar_ui("navbar"),
       sidebar = mod_sidebar_ui("sidebar"),
-      body = mod_dashBody_ui("dashbody")
+      body = mod_dashBody_ui("dashbody"),
+      fresh::use_theme(spacex_theme)
     )
   )
   

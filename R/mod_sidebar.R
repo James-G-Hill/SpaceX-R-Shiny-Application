@@ -11,7 +11,7 @@ mod_sidebar_ui <- function(id) {
     inputId = ns("sidebar_container"),
     skin = "dark",
     brandColor = "black",
-    title = "SpaceX",
+    title = "SpaceX Analysis",
     src = "/www/favicon.png",
     opacity = 1,
     bs4Dash::bs4SidebarMenu(

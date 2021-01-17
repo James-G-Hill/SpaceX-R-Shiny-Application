@@ -13,6 +13,7 @@ mod_chart_raw_ui <- function(id) {
   bs4Dash::bs4Card(
     title = "Success Rate of Launches",
     width = 12,
+    status = "dark",
     shiny::fluidRow(
       shiny::column(
         left_col_width,

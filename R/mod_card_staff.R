@@ -28,6 +28,7 @@ mod_card_staff_server <- function(id, company) {
         bs4Dash::bs4Card(
           width = 12,
           title = "Staff",
+          status = "dark",
           shiny::p(
             stringr::str_c("Founder", company$founder, sep = " : ")
           ),

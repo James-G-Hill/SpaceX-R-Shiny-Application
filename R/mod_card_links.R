@@ -28,6 +28,7 @@ mod_card_links_server <- function(id, company) {
           bs4Dash::bs4Card(
             width = 12,
             title = "Links",
+            status = "dark",
             shiny::a(href = company$links$website, "SpaceX"),
             shiny::br(),
             shiny::a(href = company$links$flickr, "Flickr"),
