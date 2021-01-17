@@ -15,6 +15,6 @@ spacex_theme <-
     ),
     fresh::bs4dash_vars(
       headings_color = "white",
-      navbar_dark_color = "black"
+      navbar_dark_color = "white"
     )
   )
