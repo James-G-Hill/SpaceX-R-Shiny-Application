@@ -27,3 +27,10 @@ The application has the following features:
 4. Load the library 'rsconnect' locally (`library('rsconnect')`)
 5. Deploy with `rsconnect::deployApp('path/to/your/app')`
 
+## Attribution
+
+This package uses a free 'rocket' icon provided by Font Awesome.
+The icon .svg file has been modified so the colour is white.
+Please find the link to the license here:
+
+https://fontawesome.com/license
