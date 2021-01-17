@@ -10,8 +10,7 @@ spacex_theme <-
       bg = "black",
       hover_bg = "white",
       color = "white",
-      hover_color = "black",
-      active_color = "#bfff00"
+      hover_color = "black"
     ),
     fresh::bs4dash_vars(
       headings_color = "white",
