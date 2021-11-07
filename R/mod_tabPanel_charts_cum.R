@@ -28,7 +28,7 @@ mod_tabPanel_charts_cum_server <- function(id, tbl_combined) {
     function(input, output, session) {
       
       tbl_cum <-
-        tbl_combined %>%
+        tbl_combined |>
           dplyr::select(
             .data$flight_date,
             .data$flight_name,

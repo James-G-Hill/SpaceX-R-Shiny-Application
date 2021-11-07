@@ -2,10 +2,12 @@ Package: spacex.app
 Title: SpaceX App
 Version: 0.0.0.9000
 Authors@R: 
-    person(given = "James",
-           family = "Hill",
-           role = c("aut", "cre"),
-           email = "j.g.hill@zoho.com")
+  person(
+    given = "James",
+    family = "Hill",
+    role = c("aut", "cre"),
+    email = "j.g.hill@zoho.com"
+  )
 Description: Provides analysis of the SpaceX dataset.
 License: file LICENSE
 Encoding: UTF-8
@@ -23,7 +25,6 @@ Imports:
     golem,
     jsonlite,
     lubridate,
-    magrittr,
     purrr,
     scales,
     shiny,

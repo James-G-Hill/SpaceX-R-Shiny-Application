@@ -107,7 +107,7 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
               input$launchpad,
               input$region
             )
-            tbl_cum %>%
+            tbl_cum |>
               dplyr::filter(
                 !.data$upcoming,
                 .data$flight_year >= input$years[1],
@@ -124,10 +124,10 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
                   input$region == "All" ~ unique(tbl_cum$region),
                   TRUE ~ input$region
                 )
-              ) %>%
+              ) |>
               dplyr::mutate(
                 cum_success = cumsum(.data$success) / dplyr::row_number()
-              ) %>%
+              ) |>
               ggplot2::ggplot(
                 ggplot2::aes(
                   x = .data$flight_date,

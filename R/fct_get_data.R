@@ -15,11 +15,11 @@ get_data <- function() {
   tbl_rockets <- get_api_rockets()
   
   datasets$tbl_combined <-
-    tbl_launches %>%
+    tbl_launches |>
       dplyr::left_join(
         tbl_launchpads,
         by = c("id_launchpad" = "id_launchpad")
-      ) %>%
+      ) |>
       dplyr::left_join(
         tbl_rockets,
         by = c("id_rocket" = "id_rocket")

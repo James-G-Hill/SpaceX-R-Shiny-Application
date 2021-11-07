@@ -53,8 +53,8 @@ mod_chart_raw_server <- function(id, tbl_raw) {
     function(input, output, session) {
       
       unique_var_names <-
-        tbl_raw %>%
-          dplyr::select(-.data$success, -.data$upcoming) %>%
+        tbl_raw |>
+          dplyr::select(-.data$success, -.data$upcoming) |>
           names()
       
       shiny::updateSelectInput(
@@ -74,13 +74,13 @@ mod_chart_raw_server <- function(id, tbl_raw) {
               input$ns_upcoming,
               input$select_var
             )
-            tbl_raw %>%
+            tbl_raw |>
               dplyr::filter(
                 .data$upcoming %in% dplyr::case_when(
                   input$ns_upcoming == "Yes" ~ c(TRUE, FALSE),
                   TRUE ~ FALSE
                 )
-              ) %>%
+              ) |>
               ggplot2::ggplot(
                 ggplot2::aes_string(
                   x = input$select_var,

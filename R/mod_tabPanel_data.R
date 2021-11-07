@@ -59,7 +59,7 @@ mod_tabPanel_data_server <- function(id, lst_tbls) {
             "Launches" = lst_tbls$launches,
             "Launchpads" = lst_tbls$launchpads,
             "Rockets" = lst_tbls$rockets
-          ) %>%
+          ) |>
             dplyr::rename_with(
               .fn = stringr::str_replace_all,
               .cols = dplyr::everything(),

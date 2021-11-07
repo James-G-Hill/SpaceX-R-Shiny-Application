@@ -32,13 +32,13 @@ get_api_launches <- function() {
   url_base <- "https://api.spacexdata.com/v4"
   url_launches <- glue::glue("{url_base}/launches")
   
-  get_api_data(url_launches) %>%
+  get_api_data(url_launches) |>
     dplyr::mutate(
       crewed = purrr::map(.data$crew, length) > 0,
       flight_date = as.Date(.data$date_utc),
       flight_year = lubridate::year(.data$flight_date),
       failures = as.character(.data$failures)
-    ) %>%
+    ) |>
     dplyr::select(
       .data$flight_number,
       flight_name = .data$name,
@@ -65,7 +65,7 @@ get_api_launchpads <- function() {
   url_base <- "https://api.spacexdata.com/v4"
   url_launchpads <- glue::glue("{url_base}/launchpads")
   
-  get_api_data(url_launchpads) %>%
+  get_api_data(url_launchpads) |>
     dplyr::select(
       id_launchpad = .data$id,
       launchpad_name = .data$name,
@@ -89,7 +89,7 @@ get_api_rockets <- function() {
   url_base <- "https://api.spacexdata.com/v4"
   url_rockets <- glue::glue("{url_base}/rockets")
   
-  get_api_data(url_rockets) %>%
+  get_api_data(url_rockets) |>
     dplyr::mutate(
       engine_number = .data$engines$number,
       engine_type = .data$engines$type,
@@ -97,7 +97,7 @@ get_api_rockets <- function() {
       height_m = .data$height$meters,
       diameter_m = .data$diameter$meters,
       mass_kg = .data$mass$kg
-    ) %>%
+    ) |>
     dplyr::select(
       id_rocket = .data$id,
       rocket_name = .data$name,

@@ -28,7 +28,7 @@ mod_tabPanel_charts_raw_server <- function(id, tbl_combined) {
     function(input, output, session) {
       
       tbl_raw <-
-        tbl_combined %>%
+        tbl_combined |>
           dplyr::mutate(
             engine_number = as.character(.data$engine_number),
             flight_year = as.character(.data$flight_year),
@@ -38,7 +38,7 @@ mod_tabPanel_charts_raw_server <- function(id, tbl_combined) {
                 !.data$success ~ "failure",
                 TRUE ~ "success"
               )
-          ) %>%
+          ) |>
           dplyr::select(
             .data$success,
             .data$upcoming,
