@@ -7,7 +7,7 @@ mod_tabPanel_charts_cum_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
-  bs4Dash::bs4TabItem(
+  bs4Dash::tabItem(
     tabName = "tab_charts_cum",
     mod_chart_cumulative_ui(ns("ns_chart_cum"))
   )

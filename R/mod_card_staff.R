@@ -25,10 +25,9 @@ mod_card_staff_server <- function(id, company) {
     
     output$staff <-
       shiny::renderUI(
-        bs4Dash::bs4Card(
+        bs4Dash::box(
           width = 12,
           title = "Staff",
-          status = "dark",
           collapsible = FALSE,
           closable = FALSE,
           shiny::p(

@@ -7,7 +7,7 @@ mod_tabPanel_about_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
-  bs4Dash::bs4TabItem(
+  bs4Dash::tabItem(
     tabName = "tab_about",
     shiny::fluidRow(
       shiny::column(

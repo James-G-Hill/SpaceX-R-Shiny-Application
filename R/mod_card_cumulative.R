@@ -10,10 +10,9 @@ mod_chart_cumulative_ui <- function(id) {
   column_width <- 12 # total no. of columns in fluidRow
   left_col_width <- 4
   
-  bs4Dash::bs4Card(
+  bs4Dash::box(
     title = "Cumulative Launch Success",
     width = 12,
-    status = "dark",
     collapsible = FALSE,
     closable = FALSE,
     shiny::fluidRow(

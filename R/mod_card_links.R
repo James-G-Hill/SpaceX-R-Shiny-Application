@@ -25,10 +25,9 @@ mod_card_links_server <- function(id, company) {
       
       output$links <-
         shiny::renderUI(
-          bs4Dash::bs4Card(
+          bs4Dash::box(
             width = 12,
             title = "Links",
-            status = "dark",
             collapsible = FALSE,
             closable = FALSE,
             shiny::a(href = company$links$website, "SpaceX"),

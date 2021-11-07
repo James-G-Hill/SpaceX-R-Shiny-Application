@@ -25,10 +25,9 @@ mod_card_summary_server <- function(id, summary) {
 
       output$summary <-
         shiny::renderUI(
-          bs4Dash::bs4Card(
+          bs4Dash::box(
             width = 12,
             title = "Mission Statement",
-            status = "dark",
             collapsible = FALSE,
             closable = FALSE,
             summary

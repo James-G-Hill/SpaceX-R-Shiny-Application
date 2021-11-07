@@ -10,12 +10,11 @@ mod_tabPanel_data_ui <- function(id) {
   column_width <- 12
   radio_col_width <- 6
   
-  bs4Dash::bs4TabItem(
+  bs4Dash::tabItem(
     tabName = "tab_data",
-    bs4Dash::bs4Card(
+    bs4Dash::box(
       title = "Tables",
       width = 12,
-      status = "dark",
       collapsible = FALSE,
       closable = FALSE,
       shiny::fluidRow(

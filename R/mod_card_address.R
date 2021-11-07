@@ -25,10 +25,9 @@ mod_card_address_server <- function(id, company) {
       
       output$address <-
         shiny::renderUI(
-          bs4Dash::bs4Card(
+          bs4Dash::box(
             width = 12,
             title = "HQ",
-            status = "dark",
             collapsible = FALSE,
             closable = FALSE,
             shiny::p(

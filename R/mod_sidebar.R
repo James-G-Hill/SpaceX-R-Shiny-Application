@@ -7,35 +7,32 @@ mod_sidebar_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
-  bs4Dash::bs4DashSidebar(
-    inputId = ns("sidebar_container"),
-    skin = "dark",
-    brandColor = "black",
-    title = "SpaceX Analysis",
-    src = "/www/favicon.png",
-    opacity = 1,
-    bs4Dash::bs4SidebarMenu(
+  bs4Dash::dashboardSidebar(
+    id = ns("sidebar_container"),
+    minified = TRUE,
+    bs4Dash::sidebarHeader("SpaceX"),
+    bs4Dash::sidebarMenu(
       id = ns("sidebar"),
       compact = TRUE,
-      bs4Dash::bs4SidebarMenuItem(
-        "Charts Cumulative",
+      bs4Dash::menuItem(
+        text = "Charts Cumulative",
         tabName = "tab_charts_cum",
-        icon = "chart-line"
+        icon = shiny::icon("chart-line")
       ),
-      bs4Dash::bs4SidebarMenuItem(
-        "Charts Raw",
+      bs4Dash::menuItem(
+        text = "Charts Raw",
         tabName = "tab_charts_raw",
-        icon = "chart-bar"
+        icon = shiny::icon("chart-bar")
       ),
-      bs4Dash::bs4SidebarMenuItem(
-        "Data",
+      bs4Dash::menuItem(
+        text = "Data",
         tabName = "tab_data",
-        icon = "table"
+        icon = shiny::icon("table")
       ),
-      bs4Dash::bs4SidebarMenuItem(
-        "About",
+      bs4Dash::menuItem(
+        text = "About",
         tabName = "tab_about",
-        icon = "info"
+        icon = shiny::icon("info")
       )
     )
   )

@@ -7,8 +7,8 @@ mod_dashBody_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
-  bs4Dash::bs4DashBody(
-    bs4Dash::bs4TabItems(
+  bs4Dash::dashboardBody(
+    bs4Dash::tabItems(
       mod_tabPanel_charts_cum_ui(ns("chart_cum")),
       mod_tabPanel_charts_raw_ui(ns("chart_raw")),
       mod_tabPanel_data_ui(ns("data")),
@@ -17,7 +17,7 @@ mod_dashBody_ui <- function(id) {
   )
   
 }
-    
+
 #' Server dashBody
 #'
 #' @param id The namespace identifier.

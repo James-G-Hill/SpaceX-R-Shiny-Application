@@ -7,7 +7,7 @@ mod_tabPanel_charts_raw_ui <- function(id) {
   
   ns <- shiny::NS(id)
   
-  bs4Dash::bs4TabItem(
+  bs4Dash::tabItem(
     tabName = "tab_charts_raw",
     mod_chart_raw_ui(ns("ns_chart_raw"))
   )

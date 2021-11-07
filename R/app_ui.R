@@ -7,15 +7,13 @@ app_ui <- function(request) {
   
   shiny::tagList(
     golem_add_external_resources(),
-    bs4Dash::bs4DashPage(
-      sidebar_min = FALSE,
-      controlbar_collapsed = TRUE,
-      controlbar_overlay = TRUE,
+    bs4Dash::dashboardPage(
       title = "Aerospace - SpaceX",
-      navbar = mod_navbar_ui("navbar"),
+      header = mod_navbar_ui("navbar"),
       sidebar = mod_sidebar_ui("sidebar"),
       body = mod_dashBody_ui("dashbody"),
-      fresh::use_theme(spacex_theme)
+      freshTheme = fresh::use_theme(spacex_theme),
+      dark = NULL
     )
   )
   
