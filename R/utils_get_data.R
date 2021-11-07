@@ -14,11 +14,9 @@ get_api_data <- function(url) {
 #' @return A list of the 'company' data points.
 #' 
 get_api_company <- function() {
-  
-  url_base <- "https://api.spacexdata.com/v4"
-  url_company <- glue::glue("{url_base}/company")
-  
-  get_api_data(url_company)
+
+  glue::glue("{get_golem_config('url_base')}/company") |>
+    get_api_data()
   
 }
 
@@ -28,11 +26,9 @@ get_api_company <- function() {
 #' @importFrom dplyr .data
 #' 
 get_api_launches <- function() {
-  
-  url_base <- "https://api.spacexdata.com/v4"
-  url_launches <- glue::glue("{url_base}/launches")
-  
-  get_api_data(url_launches) |>
+
+  glue::glue("{get_golem_config('url_base')}/launches") |>
+    get_api_data() |>
     dplyr::mutate(
       crewed = purrr::map(.data$crew, length) > 0,
       flight_date = as.Date(.data$date_utc),
@@ -62,10 +58,8 @@ get_api_launches <- function() {
 #' 
 get_api_launchpads <- function() {
   
-  url_base <- "https://api.spacexdata.com/v4"
-  url_launchpads <- glue::glue("{url_base}/launchpads")
-  
-  get_api_data(url_launchpads) |>
+  glue::glue("{get_golem_config('url_base')}/launchpads") |>
+    get_api_data() |>
     dplyr::select(
       id_launchpad = .data$id,
       launchpad_name = .data$name,
@@ -86,10 +80,8 @@ get_api_launchpads <- function() {
 #' 
 get_api_rockets <- function() {
   
-  url_base <- "https://api.spacexdata.com/v4"
-  url_rockets <- glue::glue("{url_base}/rockets")
-  
-  get_api_data(url_rockets) |>
+  glue::glue("{get_golem_config('url_base')}/rockets") |>
+    get_api_data() |>
     dplyr::mutate(
       engine_number = .data$engines$number,
       engine_type = .data$engines$type,
