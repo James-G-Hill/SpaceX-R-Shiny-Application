@@ -1,14 +1,13 @@
 # Set options here
-options(golem.app.prod = FALSE) # TRUE = production mode, FALSE = development mode
+options(golem.app.prod = FALSE)
 
 # Detach all loaded packages and clean your environment
 golem::detach_all_attached()
-# rm(list=ls(all.names = TRUE))
 
 # Document and reload your package
 golem::document_and_reload()
 
-datasets <- readRDS(here::here("dev/data/datasets.RDS"))
+datasets <- readRDS(here::here("dev", "data", "datasets.RDS"))
 
 spacex.app::run_app(
   options = list(launch.browser = TRUE),
