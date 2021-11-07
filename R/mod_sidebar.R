@@ -9,8 +9,8 @@ mod_sidebar_ui <- function(id) {
   
   bs4Dash::dashboardSidebar(
     id = ns("sidebar_container"),
-    minified = TRUE,
-    bs4Dash::sidebarHeader("SpaceX"),
+    minified = FALSE,
+    elevation = 0,
     bs4Dash::sidebarMenu(
       id = ns("sidebar"),
       compact = TRUE,

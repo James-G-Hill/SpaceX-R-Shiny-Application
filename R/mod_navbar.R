@@ -5,10 +5,14 @@
 #' 
 mod_navbar_ui <- function(id) {
   
-  ns <- shiny::NS(id)
-  
   bs4Dash::dashboardHeader(
-    compact = TRUE
+    title =
+      bs4Dash::dashboardBrand(
+        title = "SpaceX",
+        color = "primary"
+      ),
+    compact = TRUE,
+    border = FALSE
   )
 
 }
