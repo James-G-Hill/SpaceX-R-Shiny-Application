@@ -112,14 +112,16 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
                 !.data$upcoming,
                 .data$flight_year >= input$years[1],
                 .data$flight_year <= input$years[2],
-                .data$rocket_name %in% dplyr::case_when(
-                  input$rocket == "All" ~ unique(tbl_cum$rocket_name),
-                  TRUE ~ input$rocket
-                ),
-                .data$launchpad_name %in% dplyr::case_when(
-                  input$launchpad == "All" ~ unique(tbl_cum$launchpad_name),
-                  TRUE ~ input$launchpad
-                ),
+                .data$rocket_name %in%
+                  dplyr::case_when(
+                    input$rocket == "All" ~ unique(tbl_cum$rocket_name),
+                    TRUE ~ input$rocket
+                  ),
+                .data$launchpad_name %in%
+                  dplyr::case_when(
+                    input$launchpad == "All" ~ unique(tbl_cum$launchpad_name),
+                    TRUE ~ input$launchpad
+                  ),
                 .data$region %in% dplyr::case_when(
                   input$region == "All" ~ unique(tbl_cum$region),
                   TRUE ~ input$region
@@ -136,19 +138,19 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
               ) +
               ggplot2::geom_step() +
               ggplot2::geom_point(
-                data = function(x) { dplyr::filter(x, .data$success)},
+                data = \(x) { dplyr::filter(x, .data$success) },
                 fill = "palegreen4",
                 size = 3,
                 shape = 24
               ) +
               ggplot2::geom_point(
-                data = function(x) { dplyr::filter(x, !.data$success)},
+                data = \(x) { dplyr::filter(x, !.data$success) },
                 fill = "firebrick3",
                 size = 3,
                 shape = 25
               ) +
               ggrepel::geom_label_repel(
-                data = function(x) { dplyr::filter(x, !.data$success)},
+                data = \(x) { dplyr::filter(x, !.data$success) },
                 ggplot2::aes(
                   label =
                     stringr::str_c(

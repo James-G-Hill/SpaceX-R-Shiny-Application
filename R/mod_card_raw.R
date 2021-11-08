@@ -76,10 +76,11 @@ mod_chart_raw_server <- function(id, tbl_raw) {
             )
             tbl_raw |>
               dplyr::filter(
-                .data$upcoming %in% dplyr::case_when(
-                  input$ns_upcoming == "Yes" ~ c(TRUE, FALSE),
-                  TRUE ~ FALSE
-                )
+                .data$upcoming %in%
+                  dplyr::case_when(
+                    input$ns_upcoming == "Yes" ~ c(TRUE, FALSE),
+                    TRUE ~ FALSE
+                  )
               ) |>
               ggplot2::ggplot(
                 ggplot2::aes_string(
@@ -93,11 +94,12 @@ mod_chart_raw_server <- function(id, tbl_raw) {
                 limits = c(0, 1)
               ) +
               ggplot2::scale_fill_manual(
-                values = c(
-                  "success" = "palegreen4",
-                  "failure" = "firebrick3",
-                  "upcoming" = "darkgrey"
-                )
+                values =
+                  c(
+                    "success" = "palegreen4",
+                    "failure" = "firebrick3",
+                    "upcoming" = "darkgrey"
+                  )
               ) +
               ggplot2::labs(
                 title = "Success Rate of SpaceX Launches by Factor",

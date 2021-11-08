@@ -76,7 +76,7 @@ mod_tabPanel_data_server <- function(id, lst_tbls) {
       
       output$ns_button <-
         shiny::downloadHandler(
-          filename = function(file) {
+          filename = \(file) {
             stringr::str_c(
               "spacex",
               stringr::str_to_lower(input$ns_radio),
@@ -85,7 +85,7 @@ mod_tabPanel_data_server <- function(id, lst_tbls) {
               sep = "_"
             )
           },
-          content = function(con) { writexl::write_xlsx(tbl(), con) }
+          content = \(con) { writexl::write_xlsx(tbl(), con) }
         )
       
     }
