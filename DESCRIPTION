@@ -23,6 +23,7 @@ Imports:
     ggrepel,
     glue,
     golem,
+    htmltools,
     jsonlite,
     lubridate,
     purrr,
