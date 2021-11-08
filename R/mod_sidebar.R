@@ -10,7 +10,7 @@ mod_sidebar_ui <- function(id) {
   bs4Dash::dashboardSidebar(
     id = ns("sidebar_container"),
     minified = FALSE,
-    elevation = 0,
+    elevation = 1,
     bs4Dash::sidebarMenu(
       id = ns("sidebar"),
       compact = TRUE,
