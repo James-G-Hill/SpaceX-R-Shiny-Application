@@ -96,8 +96,8 @@ mod_chart_raw_server <- function(id, tbl_raw) {
               ggplot2::scale_fill_manual(
                 values =
                   c(
-                    "success" = "palegreen4",
-                    "failure" = "firebrick3",
+                    "success" = "#007bff",
+                    "failure" = "#ff0000",
                     "upcoming" = "darkgrey"
                   )
               ) +
@@ -105,7 +105,8 @@ mod_chart_raw_server <- function(id, tbl_raw) {
                 title = "Success Rate of SpaceX Launches by Factor",
                 subtitle = "Shows the % success rate within each bar",
                 y = "success rate"
-              )
+              ) +
+              ggplot2::theme_bw()
           }
         )
       

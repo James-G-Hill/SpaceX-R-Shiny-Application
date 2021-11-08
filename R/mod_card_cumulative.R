@@ -139,13 +139,13 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
               ggplot2::geom_step() +
               ggplot2::geom_point(
                 data = \(x) { dplyr::filter(x, .data$success) },
-                fill = "palegreen4",
+                fill = "#007bff",
                 size = 3,
                 shape = 24
               ) +
               ggplot2::geom_point(
                 data = \(x) { dplyr::filter(x, !.data$success) },
-                fill = "firebrick3",
+                fill = "#ff0000",
                 size = 3,
                 shape = 25
               ) +
@@ -171,7 +171,8 @@ mod_chart_cumulative_server <- function(id, tbl_cum) {
                 title = "Cumulative Success Rate of SpaceX Launches",
                 x = "flight date",
                 y = "cumulative success rate"
-              )
+              ) +
+              ggplot2::theme_bw()
           }
         )
       
